@@ -1,0 +1,99 @@
+/* Doctors.css (append or replace relevant selectors) */
+
+.mc-doctors-wrapper { padding: 24px; }
+.mc-filter-row { margin: 12px 0; display:flex; gap:8px; align-items:center; }
+.mc-doctors-grid { margin-top: 12px; }
+.mc-grid-inner { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 16px; }
+
+/* card */
+.mc-doctor-card { background: white; border-radius: 12px; padding: 12px; box-shadow: 0 4px 14px rgba(20,30,50,0.05); display:flex; flex-direction:column; align-items:center; text-align:center; }
+.mc-doctor-img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; background:#f4f7fb; }
+.mc-doctor-name { margin-top:10px; font-weight:600; }
+.mc-doctor-speciality { color:#4b5563; font-size:14px; margin-top:6px; }
+.mc-doctor-fee { margin-top:8px; font-weight:600; color:#16a34a; }
+.mc-doctor-btn { margin-top:12px; background:#0b74ff; color:white; padding:8px 12px; border-radius:8px; text-decoration:none; }
+
+/* skeleton */
+.skeleton { background: linear-gradient(90deg,#f2f5f9,#eef4fb); }
+.skeleton-rect { width:100%; height:160px; background:#e9eef6; border-radius:8px; }
+.skeleton-line { height:14px; background:#e9eef6; width:80%; margin:10px 0; border-radius:6px; }
+.skeleton-line.short { width:50%; }
+
+/* Intro Banner Styling */
+.mc-intro-banner {
+    background: #eef7ff;
+    padding: 18px 22px;
+    margin: 10px 0 22px;
+    border-radius: 10px;
+    border-left: 5px solid #3b82f6;
+}
+
+.mc-intro-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 6px;
+}
+
+.mc-intro-text {
+    color: #374151;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.mc-search-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.mc-search-input {
+    width: 60%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.mc-search-input:focus {
+    border-color: #007bff;
+}
+
+/* Why Choose Section */
+.mc-why-choose {
+    margin-top: 40px;
+    padding: 30px;
+    background: #f5faff;
+    border-radius: 12px;
+    border: 1px solid #d9e6ff;
+}
+
+.mc-why-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #004aad;
+    margin-bottom: 15px;
+}
+
+.mc-why-list {
+    list-style: none;
+    padding: 0;
+    font-size: 16px;
+    color: #333;
+    line-height: 32px;
+}
+
+.mc-why-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    margin-bottom: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #e3ecff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+}

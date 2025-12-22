@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Dr. Richard James",
+    "speciality": "General physician",
+    "image": "/uploads/doc1.png",
+    "degree": "MBBS",
+    "experience": "4 Years",
+    "fees": 50
+  },
+  {
+    "name": "Dr. Emily Larson",
+    "speciality": "Gynecologist",
+    "image": "/static/doctors/doc2.png",
+    "degree": "MBBS",
+    "experience": "3 Years",
+    "fees": 60
+  },
+  {
+    "name": "Dr. Sarah Patel",
+    "speciality": "Dermatologist",
+    "image": "/static/doctors/doc3.png",
+    "degree": "MBBS",
+    "experience": "1 Years",
+    "fees": 30
+  },
+  {
+    "name": "Dr. Christopher Lee",
+    "speciality": "Pediatricians",
+    "image": "/static/doctors/doc4.png",
+    "degree": "MBBS",
+    "experience": "2 Years",
+    "fees": 40
+  },
+  {
+    "name": "Dr. Jennifer Garcia",
+    "speciality": "Neurologist",
+    "image": "/static/doctors/doc5.png",
+    "degree": "MBBS",
+    "experience": "4 Years",
+    "fees": 50
+  },
+  {
+    "name": "Dr. Andrew Williams",
+    "speciality": "Neurologist",
+    "image": "/static/doctors/doc6.png",
+    "degree": "MBBS",
+    "experience": "4 Years",
+    "fees": 50
+  },
+  {
+    "name": "Dr. Christopher Davis",
+    "speciality": "General physician",
+    "image": "/static/doctors/doc7.png",
+    "degree": "MBBS",
+    "experience": "4 Years",
+    "fees": 50
+  },
+  {
+    "name": "Dr. Timothy White",
+    "speciality": "Gynecologist",
+    "image": "/static/doctors/doc8.png",
+    "degree": "MBBS",
+    "experience": "3 Years",
+    "fees": 60
+  },
+  {
+    "name": "Dr. Ava Mitchell",
+    "speciality": "Dermatologist",
+    "image": "/static/doctors/doc9.png",
+    "degree": "MBBS",
+    "experience": "1 Years",
+    "fees": 30
+  },
+  {
+    "name": "Dr. Jeffrey King",
+    "speciality": "Pediatricians",
+    "image": "/static/doctors/doc10.png",
+    "degree": "MBBS",
+    "experience": "2 Years",
+    "fees": 40
+  },
+  {
+    "name": "Dr. Zoe Kelly",
+    "speciality": "Gastroenterologist",
+    "image": "/static/doctors/doc11.png",
+    "degree": "MBBS",
+    "experience": "4 Years",
+    "fees": 50
+  },
+  {
+    "name": "Dr. Patrick Harris",
+    "speciality": "Neurologist",
+    "image": "/static/doctors/doc12.png",
+    "degree": "MBBS",
+    "experience": "4 Years",
+    "fees": 50
+  },
+  {
+    "name": "Dr. Chloe Evans",
+    "speciality": "General physician",
+    "image": "/static/doctors/doc13.png",
+    "degree": "MBBS",
+    "experience": "4 Years",
+    "fees": 50
+  },
+  {
+    "name": "Dr. Ryan Martinez",
+    "speciality": "Gynecologist",
+    "image": "/static/doctors/doc14.png",
+    "degree": "MBBS",
+    "experience": "3 Years",
+    "fees": 60
+  },
+  {
+    "name": "Dr. Amelia Hill",
+    "speciality": "Dermatologist",
+    "image": "/static/doctors/doc15.png",
+    "degree": "MBBS",
+    "experience": "1 Years",
+    "fees": 30
+  }
+]
