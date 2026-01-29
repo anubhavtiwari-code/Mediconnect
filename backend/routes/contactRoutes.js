@@ -1,9 +1,10 @@
 import express from "express";
 import ContactMessage from "../models/ContactMessage.js";
+import { deleteMessage } from "../controllers/contactController.js";  
 import { sendMail } from "../utils/sendMail.js";
 
 const router = express.Router();
-
+router.delete("/delete/:id", deleteMessage);
 router.post("/send-message", async (req, res) => {
   try {
     const { name, email, message } = req.body;

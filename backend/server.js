@@ -114,6 +114,7 @@ app.use("/api/contact", contactRoutes);
 // Chat routes (API)
 app.use("/api/chat", chatRoutes);
 app.use("/api/admin", adminMessageRoutes);
+app.use("/api/contact",contactRoutes);
 /* --------------------------------------------------------
    HEALTH CHECK
 -------------------------------------------------------- */
