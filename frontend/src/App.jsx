@@ -43,7 +43,6 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminRecords from "./pages/AdminRecords";
 import ManageDoctors from "./pages/ManageDoctors";
 import ManagePatients from "./pages/ManagePatients";
-import AdminMessages from "./pages/AdminMessages";
 
 // Components
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -244,7 +243,6 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route path="/admin/messages" element={<AdminMessages />} />
 
             <Route
               path="/admin/manage-doctors"

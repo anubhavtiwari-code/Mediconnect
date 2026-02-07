@@ -48,9 +48,9 @@ export default function MyProfile() {
         try {
             const formData = new FormData();
             Object.keys(form).forEach((key) => formData.append(key, form[key]));
-            if (profileImage) formData.append("image", profileImage);
+            if (profileImage) formData.append("user_pic", profileImage);
 
-            const res = await api.put("/auth/update-profile", formData, {
+            const res = await api.put("/api/auth/update-profile", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${localStorage.getItem("token")}`,

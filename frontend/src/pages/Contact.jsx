@@ -1,45 +1,6 @@
-import { useState } from "react";
 import { assets } from "../assets/assets";
-import api from "../api/client"; // axios instance
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const [statusMsg, setStatusMsg] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  // Handle input changes
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  // Submit form data
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setStatusMsg("");
-
-    try {
-      const res = await api.post("/contact/send-message", formData);
-
-      setStatusMsg(res.data.msg || "Message sent successfully!");
-      setFormData({ name: "", email: "", message: "" }); // reset form
-    } catch (err) {
-      setStatusMsg(
-        err.response?.data?.msg || "Something went wrong. Please try again."
-      );
-    }
-
-    setLoading(false);
-  };
-
   return (
     <div>
       {/* Page Title */}
@@ -116,20 +77,16 @@ const Contact = () => {
           Have any questions or suggestions? We'd love to hear from you.
         </p>
 
-        {/* FORM START */}
-        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-5">
 
           {/* Name Input */}
           <div>
             <label className="text-gray-700 font-medium">Full Name</label>
             <input
               type="text"
-              name="name"
               className="w-full p-3 mt-1 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
               placeholder="Enter your name"
               required
-              value={formData.name}
-              onChange={handleChange}
             />
           </div>
 
@@ -138,12 +95,9 @@ const Contact = () => {
             <label className="text-gray-700 font-medium">Email Address</label>
             <input
               type="email"
-              name="email"
               className="w-full p-3 mt-1 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
               placeholder="Enter your email"
               required
-              value={formData.email}
-              onChange={handleChange}
             />
           </div>
 
@@ -151,31 +105,23 @@ const Contact = () => {
           <div>
             <label className="text-gray-700 font-medium">Message</label>
             <textarea
-              name="message"
               className="w-full p-3 mt-1 border rounded-lg h-32 outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
               placeholder="Write your message here..."
               required
-              value={formData.message}
-              onChange={handleChange}
-            />
+            ></textarea>
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-all"
-            disabled={loading}
           >
-            {loading ? "Sending..." : "Send Message"}
+            Send Message
           </button>
-
-          {/* Status Message */}
-          {statusMsg && (
-            <p className="text-center text-gray-700 mt-2">{statusMsg}</p>
-          )}
 
         </form>
       </div>
+
 
       {/* Bottom Message */}
       <p className="text-center text-gray-500 pb-20">
