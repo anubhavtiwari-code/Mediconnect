@@ -55,19 +55,10 @@ const Navbar = () => {
             <NavLink to="/my-patients"><li className="py-1">MY PATIENTS</li></NavLink>
           </>
         )}
-        
 
         {user?.role === "admin" && (
           <NavLink to="/admin-dashboard"><li className="py-1">ADMIN</li></NavLink>
         )}
-        {user && user.role === "admin" && (
-          <NavLink
-            to="/admin/messages"
-             className="py-1"
-            >
-              MESSAGES
-             </NavLink>
-)}
       </ul>
 
       {/* RIGHT SIDE / PROFILE */}

@@ -15,7 +15,7 @@ import recordRoutes from "./routes/records.js";
 import doctorRoutes from "./routes/doctor.js";
 import summaryRoutes from "./routes/summaryRoutes.js";
 import aiRoutes from "./routes/ai.js";
-import contactRoutes from "./routes/contactRoutes.js";
+
 import visitSummaryRoutes from "./routes/visitsummary.js";
 import qrShareRoutes from "./routes/qrshare.js";
 import adminRoutes from "./routes/admin.js";
@@ -23,7 +23,7 @@ import appointmentRoutes from "./routes/appointmentRoutes.js";
 import assignmentRoutes from "./routes/assignmentRoutes.js";
 import documentRoutes from "./routes/documentRoutes.js";
 import chatRoutes from "./routes/chat.js"; // <-- CHAT ROUTES
-import adminMessageRoutes from "./routes/adminMessageRoutes.js";
+
 /* --------------------------------------------------------
    CREATE EXPRESS + HTTP SERVER
 -------------------------------------------------------- */
@@ -110,11 +110,10 @@ app.use("/api/ai", aiRoutes);
 app.use("/api", assignmentRoutes);
 app.use("/api/documents", documentRoutes);
 app.use("/api/appointments", appointmentRoutes);
-app.use("/api/contact", contactRoutes);
+
 // Chat routes (API)
 app.use("/api/chat", chatRoutes);
-app.use("/api/admin", adminMessageRoutes);
-app.use("/api/contact",contactRoutes);
+
 /* --------------------------------------------------------
    HEALTH CHECK
 -------------------------------------------------------- */
