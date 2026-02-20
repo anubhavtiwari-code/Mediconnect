@@ -7,7 +7,19 @@ export default function ProtectedRoute({ children, role }) {
 
   if (!user) return <Navigate to="/login" />;
 
-  if (role && user.role !== role) return <Navigate to="/" />;
+  // If role is an array
+  if (role && Array.isArray(role)) {
+    if (!role.includes(user.role)) {
+      return <Navigate to="/" />;
+    }
+  }
+
+  // If role is a single string
+  if (role && typeof role === "string") {
+    if (user.role !== role) {
+      return <Navigate to="/" />;
+    }
+  }
 
   return children;
 }
