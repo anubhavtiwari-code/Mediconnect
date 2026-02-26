@@ -1,29 +1,28 @@
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 
+import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
-import cors from "cors";
-import path from "path";
 
 import http from "http";
-import { Server } from "socket.io";  // <-- CORRECT IMPORT
+import { Server } from "socket.io"; // <-- CORRECT IMPORT
 
 // ROUTES
-import authRoutes from "./routes/auth.js";
-import recordRoutes from "./routes/records.js";
-import doctorRoutes from "./routes/doctor.js";
-import summaryRoutes from "./routes/summaryRoutes.js";
-import aiRoutes from "./routes/ai.js";
-import contactRoutes from "./routes/contactRoutes.js";
-import visitSummaryRoutes from "./routes/visitsummary.js";
-import qrShareRoutes from "./routes/qrshare.js";
 import adminRoutes from "./routes/admin.js";
+import adminMessageRoutes from "./routes/adminMessageRoutes.js";
+import aiRoutes from "./routes/ai.js";
 import appointmentRoutes from "./routes/appointmentRoutes.js";
 import assignmentRoutes from "./routes/assignmentRoutes.js";
-import documentRoutes from "./routes/documentRoutes.js";
+import authRoutes from "./routes/auth.js";
 import chatRoutes from "./routes/chat.js"; // <-- CHAT ROUTES
-import adminMessageRoutes from "./routes/adminMessageRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
+import doctorRoutes from "./routes/doctor.js";
+import documentRoutes from "./routes/documentRoutes.js";
+import qrShareRoutes from "./routes/qrshare.js";
+import recordRoutes from "./routes/records.js";
+import summaryRoutes from "./routes/summaryRoutes.js";
+import visitSummaryRoutes from "./routes/visitsummary.js";
 /* --------------------------------------------------------
    CREATE EXPRESS + HTTP SERVER
 -------------------------------------------------------- */
@@ -89,8 +88,10 @@ io.on("connection", (socket) => {
 app.use(cors());
 app.use(express.json());
 
-// Serve uploaded files
-app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+import path from "path"; // make sure this exists at top
+
+app.use("/uploads", express.static("uploads"));
+
 
 // Public static assets
 app.use("/static", express.static("public/static"));

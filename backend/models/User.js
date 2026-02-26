@@ -2,40 +2,60 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    // Common fields for all users
+    // Common fields
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     passwordHash: { type: String, required: true },
 
-    // User type: patient / doctor / admin
     role: {
       type: String,
       enum: ["patient", "doctor", "admin"],
       default: "patient",
     },
 
-    // Doctor-specific fields
+    /* =========================
+       Doctor Specific Fields
+    ========================== */
+
     speciality: { type: String, default: "" },
-    image: { type: String, default: "" }, // frontend will use default-doctor.png if empty
+    image: { type: String, default: "" },
 
     degree: { type: String, default: "" },
     experience: { type: String, default: "" },
-    fees: { type: Number, default: 500 },          // doctor fees
-    about: { type: String, default: "" },          // intro / bio
+    hospitalName: { type: String, default: "" },
 
-    // Doctor approval status (used by admin)
+    licenseCertificate: { 
+      type: String,  // store file path
+      default: ""
+    },
+
+    fees: { type: Number, default: 500 },
+    about: { type: String, default: "" },
+
     status: {
       type: String,
       enum: ["pending", "approved", "rejected"],
       default: "pending",
     },
+
     rejectReason: { type: String, default: "" },
 
-    // Patient assigned to doctor OR doctor’s patient list
-    assignedDoctor: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
-    patientsAssigned: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  },
+    approvedAt: { type: Date },   // Track approval time
 
+    /* =========================
+      Doctor-Patient Mapping
+    ========================== */
+
+    assignedDoctor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
+
+    patientsAssigned: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+    ],
+  },
   { timestamps: true }
 );
 

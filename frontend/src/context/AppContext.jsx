@@ -28,7 +28,7 @@ export const AppContextProvider = ({ children }) => {
 
       setDoctors(normalized);
 
-      console.log("Loaded doctors:", normalized.length);
+      // console.log("Loaded doctors:", normalized.length);
 
     } catch (err) {
       console.error("Failed to load doctors:", err.message);

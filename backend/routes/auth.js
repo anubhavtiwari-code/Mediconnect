@@ -2,47 +2,113 @@ import bcrypt from "bcryptjs";
 import express from "express";
 import jwt from "jsonwebtoken";
 import multer from "multer";
+import rateLimit from "express-rate-limit";
 import { authenticate } from "../middleware/auth.js";
 import User from "../models/User.js";
 
 const router = express.Router();
 
-/* ---------------- File Upload Setup ---------------- */
-const storage = multer.diskStorage({
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // max 5 attempts
+  message: "Too many login attempts. Try again after 15 minutes.",
+});
+
+/* ---------------- PROFILE IMAGE UPLOAD ---------------- */
+const profileStorage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
   filename: (req, file, cb) =>
     cb(null, Date.now() + "-" + file.originalname.replace(/\s+/g, "")),
 });
-const upload = multer({ storage });
 
+const profileUpload = multer({
+  storage: profileStorage,
+});
 
-/* ---------------- REGISTER ---------------- */
-router.post("/register", async (req, res) => {
-  try {
-    const { name, email, password, role } = req.body;
+/* ---------------- LICENSE UPLOAD (DOCTOR) ---------------- */
+const licenseStorage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "uploads/"),
+  filename: (req, file, cb) =>
+    cb(null, Date.now() + "-" + file.originalname.replace(/\s+/g, "")),
+});
 
-    const exists = await User.findOne({ email });
-    if (exists)
-      return res.status(400).json({ message: "User already exists" });
-
-    const passwordHash = await bcrypt.hash(password, 10);
-
-    const newUser = await User.create({
-      name,
-      email,
-      passwordHash,
-      role,
-    });
-
-    res.json({ message: "Registration successful", user: newUser });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+const licenseUpload = multer({
+  storage: licenseStorage,
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype === "application/pdf") cb(null, true);
+    else cb(new Error("Only PDF files are allowed"), false);
+  },
+  limits: { fileSize: 2 * 1024 * 1024 },
 });
 
 
-/* ---------------- LOGIN ---------------- */
-router.post("/login", async (req, res) => {
+/* ---------------- Register ---------------- */
+router.post(
+  "/register",
+  licenseUpload.single("licenseCertificate"),
+  async (req, res) => {
+    try {
+      const {
+        name,
+        email,
+        password,
+        role,
+        hospitalName,
+        degree,
+        speciality,
+        experience,
+      } = req.body;
+
+      const exists = await User.findOne({ email });
+      if (exists)
+        return res.status(400).json({ message: "User already exists" });
+
+      // 🔐 Doctor validation
+      if (role === "doctor") {
+        if (!hospitalName || !degree || !speciality || !experience) {
+          return res.status(400).json({
+            message: "All doctor fields are required",
+          });
+        }
+
+        if (!req.file) {
+          return res.status(400).json({
+            message: "License certificate (PDF) is required",
+          });
+        }
+      }
+
+      const passwordHash = await bcrypt.hash(password, 10);
+
+      const newUser = await User.create({
+        name,
+        email,
+        passwordHash,
+        role,
+        hospitalName: role === "doctor" ? hospitalName : "",
+        degree: role === "doctor" ? degree : "",
+        speciality: role === "doctor" ? speciality : "",
+        experience: role === "doctor" ? experience : "",
+        licenseCertificate:
+          role === "doctor" ? "/uploads/" + req.file.filename : "",
+        status: role === "doctor" ? "pending" : "approved", 
+      });
+
+      res.json({
+        message:
+          role === "doctor"
+            ? "Registration successful. Awaiting admin approval."
+            : "Registration successful",
+        user: newUser,
+      });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/* ---------------- Login ---------------- */
+router.post("/login", loginLimiter, async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -57,6 +123,13 @@ router.post("/login", async (req, res) => {
     if (!match)
       return res.status(400).json({ message: "Invalid credentials" });
 
+    /* 🔐 Doctor approval check */
+    if (user.role === "doctor" && user.status !== "approved") {
+      return res.status(403).json({
+        message: "Doctor account not approved by admin",
+      });
+    }
+
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
@@ -68,6 +141,7 @@ router.post("/login", async (req, res) => {
       token,
       user,
     });
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -78,7 +152,7 @@ router.post("/login", async (req, res) => {
 router.put(
   "/update-profile",
   authenticate,
-  upload.single("image"),
+  profileUpload.single("image"),
   async (req, res) => {
     try {
       const updates = {

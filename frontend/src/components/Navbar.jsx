@@ -52,7 +52,7 @@ const Navbar = () => {
         {user?.role === "doctor" && (
           <>
             <NavLink to="/doctor-dashboard"><li className="py-1">DASHBOARD</li></NavLink>
-            <NavLink to="/my-patients"><li className="py-1">MY PATIENTS</li></NavLink>
+            <NavLink to="/doctor/patients"><li className="py-1">MY PATIENTS</li></NavLink>
           </>
         )}
         
@@ -111,7 +111,7 @@ const Navbar = () => {
                 {user.role === "doctor" && (
                   <>
                     <p onClick={() => navigate("/doctor-dashboard")} className="hover:text-black cursor-pointer">Doctor Dashboard</p>
-                    <p onClick={() => navigate("/my-patients")} className="hover:text-black cursor-pointer">My Patients</p>
+                    <p onClick={() => navigate("/doctor/pateints")} className="hover:text-black cursor-pointer">My Patients</p>
                   </>
                 )}
 

@@ -42,7 +42,7 @@ export default function DoctorProfile() {
       ? doctor.image.startsWith("http")
         ? doctor.image
         : `http://localhost:5000${doctor.image}`
-      : "/assets/doc_placeholder.png";
+        : "https://via.placeholder.com/150?text=No+Image";
 
   return (
     <motion.div
